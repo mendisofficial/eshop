@@ -15,7 +15,7 @@ An e-commerce web application using Bootstrap as the frontend and PHP, MySQL as 
 
 5. **Configure Environment Variables:** Rename the `.env.example` file to `.env` in the project's root directory. Open the `.env` file and fill in the necessary values according to your environment.
 ### Work in Progress
-- [ ] Design a responsive user sign in and sign up page using HTML, CSS, JavaScript and Bootstrap
+- [x] Design a responsive user sign in and sign up page using HTML, CSS, JavaScript and Bootstrap
 - [ ] Program the user sign up process including input validations
 - [ ] Program the user sign in process
 - [ ] Develop a remember me add-on for sign in process

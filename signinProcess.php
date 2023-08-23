@@ -1,5 +1,6 @@
 <?php
 
+session_start();
 require "connection.php";
 
 $email = $_POST["e"];
@@ -27,11 +28,20 @@ if(empty($email)){
 
         echo ("success");
         $d = $rs->fetch_assoc();
+        $_SESSION["u"] = $d;
+        
+        if($rememberme == "true"){
+            setcookie("email",$email,time()+(60*60*24*365));
+            setcookie("password",$password,time()+(60*60*24*365));
+        }else{
+            setcookie("email","",-1);
+            setcookie("password","",-1);
+        }
 
     }else{
         echo ("Invalid Email Address or Password");
     }
-
+    
 }
 
 ?>

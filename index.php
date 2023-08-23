@@ -110,14 +110,27 @@
                                 <p class="title02">Sign In</p>
                             </div>
 
+                            <?php
+                                $email = "";
+                                $password = "";
+
+                                if (isset($_COOKIE["email"])) {
+                                    $email = $_COOKIE["email"];
+                                }
+
+                                if (isset($_COOKIE["password"])) {
+                                    $password = $_COOKIE["password"];
+                                }
+                            ?>
+
                             <div class="col-12">
                                 <label class="form-label">Email</label>
-                                <input type="email" class="form-control" placeholder="ex: john@gmail.com" id="email2" />
+                                <input type="email" class="form-control" placeholder="ex: john@gmail.com" id="email2" value="<?php echo $email; ?>" />
                             </div>
 
                             <div class="col-12">
                                 <label class="form-label">Password</label>
-                                <input type="password" class="form-control" placeholder="ex: ********" id="password2" />
+                                <input type="password" class="form-control" placeholder="ex: ********" id="password2" value="<?php echo $password; ?>" />
                             </div>
 
                             <div class="col-6">

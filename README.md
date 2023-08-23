@@ -18,7 +18,7 @@ An e-commerce web application using Bootstrap as the frontend and PHP, MySQL as 
 - [x] Design a responsive user sign in and sign up page using HTML, CSS, JavaScript and Bootstrap
 - [x] Program the user sign up process including input validations
 - [x] Program the user sign in process
-- [ ] Develop a remember me add-on for sign in process
+- [x] Develop a remember me add-on for sign in process
 - [ ] Develop a forgot password add-on for sign in process
 - [ ] Design a dynamic responsive homepage using HTML, CSS, JavaScript and Bootstrap
 - [ ] Develop a carousel for homepage using Bootstrap and JavaScript

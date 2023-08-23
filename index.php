@@ -141,7 +141,7 @@
                             </div>
 
                             <div class="col-6 text-end">
-                                <a href="#" class="link-primary">Forgotten Password?</a>
+                                <a href="#" class="link-primary" onclick="forgotPassword();">Forgotten Password?</a>
                             </div>
 
                             <div class="col-12 col-lg-6 d-grid">
@@ -158,6 +158,53 @@
                 </div>
             </div>
             <!-- /content -->
+
+            <!-- modal -->
+            <div class="modal" tabindex="-1" id="forgotPasswordModal">
+                  <div class="modal-dialog">
+                      <div class="modal-content">
+                          <div class="modal-header">
+                              <h5 class="modal-title">Forgot Password?</h5>
+                              <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                          </div>
+                          <div class="modal-body">
+                              <div class="row g-3">
+
+                                  <div class="col-6">
+                                      <label class="form-label">New Password</label>
+                                      <div class="input-group mb-3">
+                                          <input type="password" class="form-control" id="np" />
+                                          <button class="btn btn-outline-secondary" type="button" id="npb">
+                                              <i class="bi bi-eye"></i>
+                                          </button>
+                                      </div>
+                                  </div>
+
+                                  <div class="col-6">
+                                      <label class="form-label">Retype New Password</label>
+                                      <div class="input-group mb-3">
+                                          <input type="password" class="form-control" id="rnp" />
+                                          <button class="btn btn-outline-secondary" type="button" id="rnpb">
+                                              <i class="bi bi-eye"></i>
+                                          </button>
+                                      </div>
+                                  </div>
+
+                                  <div class="col-12">
+                                      <label class="form-label">Verifiction Code</label>
+                                      <input type="text" class="form-control" id="vc" />
+                                  </div>
+
+                              </div>
+                          </div>
+                          <div class="modal-footer">
+                              <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                              <button type="button" class="btn btn-primary">Reset Password</button>
+                          </div>
+                      </div>
+                  </div>
+              </div>
+              <!-- /modal -->
 
             <!-- footer -->
             <div class="col-12 d-none d-lg-block fixed-bottom">

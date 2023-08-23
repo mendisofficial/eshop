@@ -174,7 +174,7 @@
                                       <label class="form-label">New Password</label>
                                       <div class="input-group mb-3">
                                           <input type="password" class="form-control" id="np" />
-                                          <button class="btn btn-outline-secondary" type="button" id="npb">
+                                          <button class="btn btn-outline-secondary" type="button" id="npb" onclick="showPassword();">
                                               <i class="bi bi-eye"></i>
                                           </button>
                                       </div>
@@ -184,7 +184,7 @@
                                       <label class="form-label">Retype New Password</label>
                                       <div class="input-group mb-3">
                                           <input type="password" class="form-control" id="rnp" />
-                                          <button class="btn btn-outline-secondary" type="button" id="rnpb">
+                                          <button class="btn btn-outline-secondary" type="button" id="rnpb" onclick="showPassword2();">
                                               <i class="bi bi-eye"></i>
                                           </button>
                                       </div>
@@ -199,7 +199,7 @@
                           </div>
                           <div class="modal-footer">
                               <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-                              <button type="button" class="btn btn-primary">Reset Password</button>
+                              <button type="button" class="btn btn-primary" onclick="resetPassword();">Reset Password</button>
                           </div>
                       </div>
                   </div>

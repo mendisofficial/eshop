@@ -9,6 +9,7 @@
     <link rel="icon" href="resources/logo.svg" />
 
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-4bw+/aepP/YC94hEpVNVgiZdgIC5+VKNBQNGCHeKRQN+PtmoHDEXuppvnDJzQIu9" crossorigin="anonymous" />
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.5/font/bootstrap-icons.css" />
     <link rel="stylesheet" href="style.css" />
 </head>
 
@@ -111,12 +112,12 @@
 
                             <div class="col-12">
                                 <label class="form-label">Email</label>
-                                <input type="email" class="form-control" placeholder="ex: john@gmail.com" />
+                                <input type="email" class="form-control" placeholder="ex: john@gmail.com" id="email2" />
                             </div>
 
                             <div class="col-12">
                                 <label class="form-label">Password</label>
-                                <input type="password" class="form-control" placeholder="ex: ********" />
+                                <input type="password" class="form-control" placeholder="ex: ********" id="password2" />
                             </div>
 
                             <div class="col-6">
@@ -131,7 +132,7 @@
                             </div>
 
                             <div class="col-12 col-lg-6 d-grid">
-                                <button class="btn btn-primary">Sign In</button>
+                                <button class="btn btn-primary" onclick="signin();">Sign In</button>
                             </div>
 
                             <div class="col-12 col-lg-6 d-grid">
@@ -153,6 +154,7 @@
         </div>
     </div>
 
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/js/bootstrap.bundle.min.js" integrity="sha384-HwwvtgBNo3bZJJLYd8oVXjrBZt8cqVSpeBNS5n7C8IVInixGAoxmnlMuBnhbgrkm" crossorigin="anonymous"></script>
     <script src="script.js"></script>
 </body>
 </html>

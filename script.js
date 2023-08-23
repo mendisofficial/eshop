@@ -47,3 +47,31 @@ function signUp() {
     r.open("POST", "signUpProcess.php", true);
     r.send(f);
 }
+
+function signin(){
+    var email = document.getElementById("email2");
+    var password = document.getElementById("password2");
+    var rememberme = document.getElementById("rememberme");
+
+    var f = new FormData();
+    f.append ("e",email.value);
+    f.append ("p",password.value);
+    f.append ("r",rememberme.checked);
+
+    var r = new XMLHttpRequest();
+
+    r.onreadystatechange = function(){
+        if(r.readyState == 4 && r.status == 200){
+            var t = r.responseText;
+            if(t == "success"){
+                window.location = "home.php";
+            }else{
+                alert (t);
+            }
+            
+        }
+    }
+    
+    r.open("POST","signinProcess.php",true);
+    r.send(f);
+}

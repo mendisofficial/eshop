@@ -18,8 +18,19 @@
         <div class="row mt-1 mb-1">
 
             <div class="offset-lg-1 col-12 col-lg-3 align-self-start mt-2">
-                <span class="text-lg-start"><b>Welcome </b>Chathusha Mendis</span> |
-                <span class="text-lg-start fw-bold">Sign Out</span> |
+            <?php
+                if (isset($_SESSION["u"])) {
+                    $session_data = $_SESSION["u"];
+            ?>
+            <span class="text-lg-start"><b>Welcome </b><?php echo $session_data["fname"]." ".$session_data["lname"]; ?></span> |
+            <span class="text-lg-start fw-bold" style="cursor: pointer;">Sign Out</span> |
+            <?php
+                } else {
+            ?>
+            <a href="index.php" class="text-decoration-none text-warning fw-bold">Sign In or Register</a> |
+            <?php
+                }
+            ?>
                 <span class="text-lg-start fw-bold">Help and Contact</span>
             </div>
 

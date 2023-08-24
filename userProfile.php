@@ -23,11 +23,8 @@
         <div class="row">
 
             <?php
-
             session_start();
-
             require "header.php";
-
             require "connection.php";
 
             if (isset($_SESSION["u"])) {
@@ -108,7 +105,7 @@
                                                 <label class="form-label">Password</label>
                                                 <div class="input-group">
                                                     <input type="password" id="pw" value="<?php echo $details_data["password"]; ?>" class="form-control" aria-describedby="basic-addon2">
-                                                    <span class="input-group-text" id="basic-addon2"><i class="bi bi-eye-fill"></i></span>
+                                                    <span class="input-group-text" id="basic-addon2" style="cursor: pointer;"><i class="bi bi-eye-fill"></i></span>
                                                 </div>
                                             </div>
 
@@ -179,9 +176,9 @@
                                                                                                                         if (!empty($address_data["province_province_id"])) {
                                                                                                                             if ($province_data["province_id"] == $address_data["province_province_id"]) {
                                                                                                                         ?> selected <?php
-                                                                                                                                }
                                                                                                                             }
-                                                                                                                                    ?>>
+                                                                                                                        }
+                                                                ?>>
                                                             <?php echo $province_data["province_name"]; ?>
                                                         </option>
                                                     <?php
@@ -221,7 +218,7 @@
                                             ?>
                                                 <div class="col-6">
                                                     <label class="form-label">Postal Code</label>
-                                                    <input type="text" id="pc" class="form-control" value="<?php echo $address_data["postal_code"];?>" />
+                                                    <input type="text" id="pc" class="form-control" value="<?php echo $address_data["postal_code"]; ?>" />
                                                 </div>
                                             <?php
                                             }

@@ -105,7 +105,7 @@
                                                 <label class="form-label">Password</label>
                                                 <div class="input-group">
                                                     <input type="password" id="pw" value="<?php echo $details_data["password"]; ?>" class="form-control" aria-describedby="basic-addon2">
-                                                    <span class="input-group-text" id="basic-addon2" style="cursor: pointer;"><i class="bi bi-eye-fill"></i></span>
+                                                    <span class="input-group-text" id="pwb" style="cursor: pointer;" onclick="showPassword3();"><i class="bi bi-eye-fill"></i></span>
                                                 </div>
                                             </div>
 
@@ -193,7 +193,21 @@
                                                 <label class="form-label">District</label>
                                                 <select class="form-select" id="district">
                                                     <option value="0">Select District</option>
-                                                    <option value="1">Kaluthara District</option>
+                                                    <?php
+
+                                                    for ($x = 0; $x < $district_num; $x++) {
+                                                        $district_data = $district_rs->fetch_assoc();
+                                                    ?>
+                                                        <option value="<?php echo $district_data["district_id"]; ?>" <?php
+                                                                                                                        if (!empty($address_data["district_district_id"])) {
+                                                                                                                            if ($district_data["district_id"] == $address_data["district_district_id"]) {
+                                                                                                                        ?>selected<?php
+                                                                                                                            }
+                                                                                                                        }
+                                                                        ?>><?php echo $district_data["district_name"] ?></option>
+                                                    <?php
+                                                    }
+                                                    ?>
                                                 </select>
                                             </div>
 
@@ -201,7 +215,22 @@
                                                 <label class="form-label">City</label>
                                                 <select class="form-select" id="city">
                                                     <option value="0">Select City</option>
-                                                    <option value="1">Horana</option>
+                                                    <?php
+                                                    
+                                                    for ($x = 0; $x < $city_num; $x++) {
+                                                        $city_data = $city_rs->fetch_assoc();
+                                                    ?>
+                                                        <option value="<?php echo $city_data["city_id"]; ?>" 
+                                                        <?php
+                                                            if (!empty($address_data["city_id"])) {
+                                                                if ($city_data["city_id"] == $address_data["city_city_id"]) {
+                                                            ?>selected<?php
+                                                                    }
+                                                                }
+                                                                        ?>><?php echo $city_data["city_name"] ?></option>
+                                                    <?php
+                                                    }
+                                                    ?>
                                                 </select>
                                             </div>
 

@@ -180,7 +180,8 @@ function signout(){
 
             if(t == "success"){
 
-                window.location.reload();
+                // window.location.reload();
+                window.location = "index.php";
 
             }else{
                 alert (t);
@@ -190,5 +191,70 @@ function signout(){
 
     r.open("GET","signoutProcess.php",true);
     r.send();
+    
+}
+
+function showPassword3(){
+
+    var pw = document.getElementById("pw");
+    var pwb = document.getElementById("pwb");
+
+    if(pw.type == "password"){
+        pw.type = "text";
+        pwb.innerHTML = '<i class="bi bi-eye-slash-fill"></i>';
+    }else{
+        pw.type = "password";
+        pwb.innerHTML = '<i class="bi bi-eye-fill"></i>';
+    }
+
+}
+
+function updateProfile(){
+
+    var profile_img = document.getElementById("profileImage");
+    var first_name = document.getElementById("fname");
+    var last_name = document.getElementById("lname");
+    var mobile_no = document.getElementById("mobile");
+    var password = document.getElementById("pw");
+    var email_address = document.getElementById("email");
+    var address_line_1 = document.getElementById("line1");
+    var address_line_2 = document.getElementById("line2");
+    var province = document.getElementById("province");
+    var district = document.getElementById("district");
+    var city = document.getElementById("city");
+    var postal_code = document.getElementById("pc");
+
+    var f = new FormData();
+    f.append("img",profile_img.files[0]);
+    f.append("fn",first_name.value);
+    f.append("ln",last_name.value);
+    f.append("mn",mobile_no.value);
+    f.append("pw",password.value);
+    f.append("ea",email_address.value);
+    f.append("al1",address_line_1.value);
+    f.append("al2",address_line_2.value);
+    f.append("p",province.value);
+    f.append("d",district.value);
+    f.append("c",city.value);
+    f.append("pc",postal_code.value);
+
+    var r = new XMLHttpRequest();
+
+    r.onreadystatechange = function (){
+        if(r.status == 200 && r.readyState == 4){
+            var t = r.responseText;
+
+            if(t == "success"){
+                signout();
+                // window.location = "home.php";
+            }else{
+                alert (t);
+            }
+            
+        }
+    }
+
+    r.open("POST","userProfileUpdateProcess.php",true);
+    r.send(f);
     
 }

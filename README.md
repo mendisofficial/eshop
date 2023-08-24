@@ -21,7 +21,7 @@ An e-commerce web application using Bootstrap as the frontend and PHP, MySQL as 
 - [x] Develop a remember me add-on for sign in process
 - [x] Develop a forgot password add-on for sign in process
 - [x] Design a dynamic responsive homepage using HTML, CSS, JavaScript and Bootstrap
-- [ ] Develop a carousel for homepage using Bootstrap and JavaScript
+- [x] Develop a carousel for homepage using Bootstrap and JavaScript
 - [ ] Program the homepage including session management and latest products listing
 - [ ] Program the user sign out process using session management
 - [ ] Design a responsive user profile page using HTML, CSS, JavaScript and Bootstrap

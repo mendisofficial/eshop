@@ -26,7 +26,7 @@ An e-commerce web application using Bootstrap as the frontend and PHP, MySQL as 
 - [x] Program the user sign out process using session management
 - [x] Design a responsive user profile page using HTML, CSS, JavaScript and Bootstrap
 - [x] Program the user profile updating process
-- [ ] Design a responsive product registration page using HTML, CSS, JavaScript and Bootstrap
+- [x] Design a responsive product registration page using HTML, CSS, JavaScript and Bootstrap
 - [ ] Program the product registration process including image uploading
 - [ ] Program the product updating process
 - [ ] Design a responsive seller’s store page using HTML, CSS, JavaScript and Bootstrap

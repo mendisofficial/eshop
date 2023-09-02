@@ -258,10 +258,10 @@
                                                 </div>
                                                 <div class="col-12">
                                                     <div class="row">
-                                                        <div class="offset-0 offset-lg-2 col-2 pm pm1"><img src="resources/payment_images/paypal_img.png"></div>
-                                                        <div class="col-2 pm pm2"><img src="resources/payment_images/visa_img.png"></div>
-                                                        <div class="col-2 pm pm3"><img src="resources/payment_images/mastercard_img.png"></div>
-                                                        <div class="col-2 pm pm4"><img src="resources/payment_images/american_express_img.png"></div>
+                                                        <div class="offset-0 offset-lg-2 col-2 pm pm1"></div>
+                                                        <div class="col-2 pm pm2"></div>
+                                                        <div class="col-2 pm pm3"></div>
+                                                        <div class="col-2 pm pm4"></div>
                                                     </div>
                                                 </div>
                                             </div>

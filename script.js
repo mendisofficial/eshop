@@ -258,3 +258,93 @@ function updateProfile(){
     r.send(f);
     
 }
+
+function loadBrands(){
+    var category = document.getElementById("category").value;
+
+    var r = new XMLHttpRequest();
+
+    r.onreadystatechange = function (){
+        if(r.status == 200 && r.readyState == 4){
+            var t = r.responseText;
+            
+            document.getElementById("brand").innerHTML = t;
+            
+        }
+    }
+
+    r.open("GET","loadBrandProcess.php?c="+category,true);
+    r.send();
+}
+
+function changeProductImage(){
+    var images = document.getElementById("imageuploader");
+
+    images.onchange = function (){
+        var file_count = images.files.length;
+
+        if(file_count <= 3){
+
+            for(var x = 0; x < file_count; x++){
+                var file = images.files[x];
+                var url = window.URL.createObjectURL(file);
+                document.getElementById("i" + x).src = url;
+            }
+
+        }else{
+            alert (file_count + " files selected. Please select only 3 or less than 3 files.")
+        }
+    }
+}
+
+function addProduct(){
+    var category = document.getElementById("category");
+    var brand = document.getElementById("brand");
+    var model = document.getElementById("model");
+    var title = document.getElementById("title");
+    var condition = 0;
+    if(document.getElementById("b").checked){
+        condition = 1;
+    }else if(document.getElementById("u").checked){
+        condition = 2;
+    }
+    var clr = document.getElementById("clr");
+    var qty = document.getElementById("qty");
+    var cost = document.getElementById("cost");
+    var dwc = document.getElementById("dwc");
+    var doc = document.getElementById("doc");
+    var desc = document.getElementById("desc");
+    var image = document.getElementById("imageuploader");
+
+    var f = new FormData();
+    f.append("ca",category.value);
+    f.append("b",brand.value);
+    f.append("m",model.value);
+    f.append("t",title.value);
+    f.append("con",condition);
+    f.append("col",clr.value);
+    f.append("qty",qty.value);
+    f.append("cost",cost.value);
+    f.append("dwc",dwc.value);
+    f.append("doc",doc.value);
+    f.append("desc",desc.value);
+
+    var file_count = image.files.length;
+    for(var x = 0; x < file_count; x++){
+        f.append("img" + x,image.files[x]);
+    }
+
+    var r = new XMLHttpRequest();
+    r.onreadystatechange = function (){
+        if(r.status == 200 && r.readyState == 4){
+            var t = r.responseText;
+            if(t == "success"){
+                window.location.reload();
+            }else{
+                alert (t);
+            }
+        }
+    }
+    r.open("POST","addProductProcess.php",true);
+    r.send(f);
+}

@@ -28,10 +28,10 @@ An e-commerce web application using Bootstrap as the frontend and PHP, MySQL as 
 - [x] Program the user profile updating process
 - [x] Design a responsive product registration page using HTML, CSS, JavaScript and Bootstrap
 - [x] Program the product registration process including image uploading
-- [ ] Program the product updating process
-- [ ] Design a responsive seller’s store page using HTML, CSS, JavaScript and Bootstrap
+- [x] Design a responsive seller’s store page using HTML, CSS, JavaScript and Bootstrap
 - [ ] Program the seller’s store using product sorting and pagination
 - [ ] Program the seller’s product activation and deactivation process
+- [ ] Program the product updating process
 - [ ] Design a responsive product searching page using HTML, CSS, JavaScript and Bootstrap
 - [ ] Program the basic product searching process including pagination
 - [ ] Program the advanced product searching process including pagination

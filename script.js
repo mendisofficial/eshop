@@ -402,3 +402,24 @@ function sort(x) {
 function clearSort() {
     window.location.reload();
 }
+
+function changeStatus(id) {
+
+    var product_id = id;
+    var r = new XMLHttpRequest();
+
+    r.onreadystatechange = function () {
+        if (r.status == 200 && r.readyState == 4) {
+            var t = r.responseText;
+            if (t == "activated" || t == "deactivated") {
+                window.location.reload();
+            } else {
+                alert(t);
+            }
+        }
+    }
+
+    r.open("GET", "changeStatusProcess.php?p=" + product_id, true);
+    r.send();
+
+}

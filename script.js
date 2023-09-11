@@ -423,3 +423,68 @@ function changeStatus(id) {
     r.send();
 
 }
+
+function sendId(id) {
+
+    var r = new XMLHttpRequest();
+
+    r.onreadystatechange = function () {
+        if (r.status == 200 && r.readyState == 4) {
+            var t = r.responseText;
+            if (t == "success") {
+                window.location = "updateProduct.php";
+            } else {
+                alert(t);
+            }
+        }
+    }
+
+    r.open("GET", "sendIdProcess.php?id=" + id, true);
+    r.send();
+
+}
+
+function updateProduct() {
+    var title = document.getElementById("t");
+    var qty = document.getElementById("q");
+    var dwc = document.getElementById("dwc");
+    var doc = document.getElementById("doc");
+    var description = document.getElementById("d");
+    var image = document.getElementById("imageuploader");
+
+    var f = new FormData();
+    f.append("t", title.value);
+    f.append("q", qty.value);
+    f.append("dwc", dwc.value);
+    f.append("doc", doc.value);
+    f.append("d", description.value);
+
+    var file_count = image.files.length;
+    for (var x = 0; x < file_count; x++) {
+        f.append("i" + x, image.files[x]);
+    }
+
+    var r = new XMLHttpRequest();
+
+    r.onreadystatechange = function () {
+        if (r.status == 200 && r.readyState == 4) {
+            var t = r.responseText;
+
+            if (t == "success") {
+                window.location = "myProducts.php";
+            } else if (t == "Invalid Image Count") {
+
+                if (confirm("Don't you want to update Product Images?") == true) {
+                    window.location = "myProducts.php";
+                } else {
+                    alert("Select images.");
+                }
+            } else {
+                alert(t);
+            }
+        }
+    }
+
+    r.open("POST", "updateProductProcess.php", true);
+    r.send(f);
+}

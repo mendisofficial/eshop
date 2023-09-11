@@ -31,7 +31,7 @@ An e-commerce web application using Bootstrap as the frontend and PHP, MySQL as 
 - [x] Design a responsive seller’s store page using HTML, CSS, JavaScript and Bootstrap
 - [x] Program the seller’s store using product sorting and pagination
 - [x] Program the seller’s product activation and deactivation process
-- [ ] Program the product updating process
+- [x] Program the product updating process
 - [ ] Design a responsive product searching page using HTML, CSS, JavaScript and Bootstrap
 - [ ] Program the basic product searching process including pagination
 - [ ] Program the advanced product searching process including pagination

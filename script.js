@@ -488,3 +488,25 @@ function updateProduct() {
     r.open("POST", "updateProductProcess.php", true);
     r.send(f);
 }
+
+function basicSearch(x) {
+    var text = document.getElementById("kw").value;
+    var select = document.getElementById("c").value;
+
+    var f = new FormData();
+    f.append("t", text);
+    f.append("s", select);
+    f.append("page", x);
+
+    var r = new XMLHttpRequest();
+
+    r.onreadystatechange = function () {
+        if (r.status == 200 && r.readyState == 4) {
+            var t = r.responseText;
+            document.getElementById("basicSearchResult").innerHTML = t;
+        }
+    }
+
+    r.open("POST", "basicSearchProcess.php", true);
+    r.send(f);
+}

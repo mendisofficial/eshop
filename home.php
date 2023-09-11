@@ -37,9 +37,9 @@ require "connection.php";
                     <div class="col-12 col-lg-6">
 
                         <div class="input-group mb-3 mt-3">
-                            <input type="text" class="form-control" aria-label="Text input with dropdown button" />
+                            <input type="text" id="kw" class="form-control" aria-label="Text input with dropdown button" />
 
-                            <select class="form-select" style="max-width: 250px;">
+                            <select class="form-select" style="max-width: 250px;" id="c">
                                 <option value="0">All Categories</option>
                                 <?php
                                     $category_rs = Database::search("SELECT * FROM `category`");
@@ -60,7 +60,7 @@ require "connection.php";
                     </div>
 
                     <div class="col-12 col-lg-2 d-grid">
-                        <button class="btn btn-primary mt-3 mb-3">Search</button>
+                        <button class="btn btn-primary mt-3 mb-3" onclick="basicSearch(0);">Search</button>
                     </div>
 
                     <div class="col-12 col-lg-2 mt-2 mt-lg-4 text-center text-lg-start">

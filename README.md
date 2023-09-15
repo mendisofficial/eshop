@@ -37,7 +37,7 @@ An e-commerce web application using Bootstrap as the frontend and PHP, MySQL as 
 - [x] Program the advanced product searching process including pagination
 - [x] Program the product sorting process
 - [x] Design a responsive single product view page using HTML, CSS, JavaScript and Bootstrap
-- [ ] Program the single product view page including the seller’s information
+- [x] Program the single product view page including the seller’s information
 - [ ] Design a responsive watchlist page using HTML, CSS, JavaScript and Bootstrap
 - [ ] Program the watchlist page including product adding and viewing process
 - [ ] Program the product removing process from the watchlist

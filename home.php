@@ -156,7 +156,7 @@ require "connection.php";
                                                 <span class="card-text text-primary">Rs. <?php echo $product_data["price"]; ?> .00</span><br />
                                                 <span class="card-text text-warning fw-bold">In Stock</span><br />
                                                 <span class="card-text text-success fw-bold"><?php echo $product_data["qty"]; ?> Items Available</span><br />
-                                                <button class="col-12 btn btn-success">Buy Now</button>
+                                                <a href="<?php echo "singleProductView.php?id=". ($product_data["id"]); ?>" class="col-12 btn btn-success">Buy Now</a>
                                                 <button class="col-12 btn btn-dark mt-2">
                                                     <i class="bi bi-cart4 text-white fs-5"></i>
                                                 </button>

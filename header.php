@@ -27,7 +27,7 @@
             <?php
                 } else {
             ?>
-            <a href="index.php" class="text-decoration-none text-warning fw-bold">Sign In or Register</a> |
+            <a href="index.php" class="text-decoration-none text-danger fw-bold">Sign In or Register</a> |
             <?php
                 }
             ?>

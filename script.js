@@ -547,3 +547,60 @@ function advancedSearch(x){
     r.open("POST","advancedSearchProcess.php",true);
     r.send(f);
 }
+
+function changeMainImg(id) {
+
+    var new_img = document.getElementById("product_img" + id).src;
+    var main_img = document.getElementById("mainImg");
+
+    main_img.style.backgroundImage = "url(" + new_img + ")";
+
+}
+
+function qty_inc(qty){
+
+    var input = document.getElementById("qty_input");
+
+    if(input.value < qty){
+
+        var new_value = parseInt(input.value) + 1;
+        input.value = new_value;
+
+    }else{
+
+        alert ("You have reched to the Maximum");
+        input.value = qty;
+
+    }
+
+}
+
+function qty_dec(){
+    var input = document.getElementById("qty_input");
+
+    if(input.value > 1){
+
+        var new_value = parseInt(input.value) - 1;
+        input.value = new_value;
+
+    }else{
+
+        alert ("You have reched to the Minimum");
+        input.value = 1;
+
+    }
+}
+
+function check_value(qty){
+
+    var input = document.getElementById("qty_input");
+
+    if(input.value < 1){
+        alert ("You must add 1 or more");
+        input.value = 1;
+    }else if(input.value > qty){
+        alert ("Insufficieant quantity");
+        input.value = qty;
+    }
+
+}

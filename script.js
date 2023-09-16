@@ -629,3 +629,23 @@ function addToWatchlist(id){
     r.send();
 
 }
+
+function removeFromWatchlist(id){
+    var r = new XMLHttpRequest();
+
+    r.onreadystatechange = function(){
+        if(r.status == 200 && r.readyState == 4){
+            var t = r.responseText;
+            if(t == "Deleted"){
+                window.location.reload();
+            }else{
+                alert(t);
+            }
+            
+            
+        }
+    }
+
+    r.open("GET","removeFromWatchListProcess.php?id="+id,true);
+    r.send();
+}

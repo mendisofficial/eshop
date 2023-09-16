@@ -160,7 +160,7 @@ require "connection.php";
                                                 <button class="col-12 btn btn-dark mt-2">
                                                     <i class="bi bi-cart4 text-white fs-5"></i>
                                                 </button>
-                                                <button class="col-12 btn btn-outline-light mt-2 border border-primary">
+                                                <button onclick="addToWatchlist(<?php echo $product_data['id'];?>);" class="col-12 btn btn-outline-light mt-2 border border-primary">
                                                     <i class="bi bi-heart-fill text-dark fs-5"></i>
                                                 </button>
                                             </div>

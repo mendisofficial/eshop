@@ -604,3 +604,28 @@ function check_value(qty){
     }
 
 }
+
+function addToWatchlist(id){
+
+    var r = new XMLHttpRequest();
+
+    r.onreadystatechange = function(){
+        if(r.status == 200 && r.readyState == 4){
+            var t = r.responseText;
+            if(t == "Added"){
+                alert ("Product added to the watchlist successfully.");
+                window.location.reload();
+            }else if(t == "Removed"){
+                alert ("Product removed from watchlist successfully.");
+                window.location.reload();
+            }else{
+                alert(t);
+            }
+            
+        }
+    }
+
+    r.open("GET","addWatchListProcess.php?id="+id,true);
+    r.send();
+
+}

@@ -1,29 +1,34 @@
-<!DOCTYPE html>
-<html>
+<?php
 
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+session_start();
+require "connection.php";
 
-    <title>Watchlist | eShop</title>
+if (isset($_SESSION["u"])) {
+?>
+    <!DOCTYPE html>
+    <html>
 
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-4bw+/aepP/YC94hEpVNVgiZdgIC5+VKNBQNGCHeKRQN+PtmoHDEXuppvnDJzQIu9" crossorigin="anonymous" />
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.9.1/font/bootstrap-icons.css">
-    <link rel="stylesheet" href="style.css" />
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-    <link rel="icon" href="resources/logo.svg" />
-</head>
+        <title>Watchlist | eShop</title>
 
-<body>
+        <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-4bw+/aepP/YC94hEpVNVgiZdgIC5+VKNBQNGCHeKRQN+PtmoHDEXuppvnDJzQIu9" crossorigin="anonymous" />
+        <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.9.1/font/bootstrap-icons.css">
+        <link rel="stylesheet" href="style.css" />
 
-    <div class="container-fluid">
-        <div class="row">
+        <link rel="icon" href="resources/logo.svg" />
+    </head>
 
-            <?php include "header.php";
+    <body>
 
+        <div class="container-fluid">
+            <div class="row">
 
-            ?>
+                <?php include "header.php";
 
+                ?>
                 <div class="col-12">
                     <div class="row">
                         <div class="col-12 border border-1 border-primary rounded mb-2">
@@ -52,7 +57,7 @@
                                     <hr />
                                 </div>
 
-                                <div class="col-11 col-lg-2 border-0 border-end border-1 border-dark">
+                                <div class="col-11 col-lg-2 border-0 border-end border-1 border-dark" >
                                     <nav aria-label="breadcrumb">
                                         <ol class="breadcrumb">
                                             <li class="breadcrumb-item"><a href="home.php">Home</a></li>
@@ -66,6 +71,13 @@
                                     </nav>
                                 </div>
 
+                                <?php
+                                $watclist_rs = Database::search("SELECT * FROM `watchlist` WHERE 
+                                `users_email`='" . $_SESSION["u"]["email"] . "'");
+                                $watchlist_num = $watclist_rs->num_rows;
+
+                                if ($watchlist_num == 0) {
+                                ?>
                                     <!-- empty view -->
                                     <div class="col-12 col-lg-9">
                                         <div class="row">
@@ -79,25 +91,30 @@
                                         </div>
                                     </div>
                                     <!-- empty view -->
-                                
-                                    <!-- have products -->
-                                    <!-- <div class="col-12 col-lg-9">
-                                        <div class="row">
-                                            
+                                    <?php
+                                } else {
+                                    for ($x = 0; $x < $watchlist_num; $x++) {
+                                        $watchlist_data = $watclist_rs->fetch_assoc();
+
+                                    ?>
+                                        <!-- have products -->
+                                        <div class="col-12 col-lg-9">
+                                            <div class="row">
+
                                                 <div class="card mb-3 mx-0 mx-lg-2 col-12">
                                                     <div class="row g-0">
                                                         <div class="col-md-4">
-                                                            
+
                                                             <img src="resources/empty.svg" class="img-fluid rounded-start" style="height: 200px;" />
                                                         </div>
                                                         <div class="col-md-5">
                                                             <div class="card-body">
-                                                                
+
                                                                 <h5 class="card-title fs-2 fw-bold text-primary">Apple iPhone 14</h5>
-                                                                
+
                                                                 <span class="fs-5 fw-bold text-black-50">Colour : blue</span>
                                                                 &nbsp;&nbsp; | &nbsp;&nbsp;
-                                                                
+
                                                                 <span class="fs-5 fw-bold text-black-50">Condition : Used</span>
                                                                 <br />
                                                                 <span class="fs-5 fw-bold text-black-50">Price :</span>&nbsp;&nbsp;
@@ -115,28 +132,36 @@
                                                             <div class="card-body d-lg-grid">
                                                                 <a href="#" class="btn btn-outline-success mb-2">Buy Now</a>
                                                                 <a href="#" class="btn btn-outline-warning mb-2">Add to Cart</a>
-                                                                <a href="#" class="btn btn-outline-danger" >Remove</a>
+                                                                <a href="#" onclick="removeFromWatchlist(<?php echo $watchlist_data['id']; ?>);" 
+                                                                class="btn btn-outline-danger">Remove</a>
                                                             </div>
                                                         </div>
                                                     </div>
                                                 </div>
 
+                                            </div>
                                         </div>
-                                    </div> -->
-                                    <!-- have products -->
-
+                                        <!-- have products -->
+                                <?php
+                                    }
+                                }
+                                ?>
 
                             </div>
                         </div>
                     </div>
                 </div>
 
-            <?php include "footer.php"; ?>
+                <?php include "footer.php"; ?>
 
+            </div>
         </div>
-    </div>
 
-    <script src="script.js"></script>
-</body>
+        <script src="script.js"></script>
+    </body>
 
-</html>
+    </html>
+<?php
+}
+
+?>

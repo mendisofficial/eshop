@@ -112,7 +112,7 @@
 
 .mainImg{
     height: 640px;
-    background-image: url("resourses/addproductimg.svg");
+    background-image: url("resources/empty.svg");
     background-size: contain;
     background-repeat: no-repeat;
     background-position: center;
@@ -145,4 +145,12 @@
 
 .qty-dec{
     border-bottom-right-radius: 5px;
+}
+
+.emptyView{
+    height: 400px;
+    background-image: url("resources/watchlistEmptyView.svg");
+    background-position: center;
+    background-size: contain;
+    background-repeat: no-repeat;
 }

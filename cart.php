@@ -1,28 +1,41 @@
-<!DOCTYPE html>
-<html>
+<?php
+session_start();
+require "connection.php";
 
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+if (isset($_SESSION["u"])) {
 
-    <title>Cart | eShop</title>
+    $user = $_SESSION["u"]["email"];
 
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-4bw+/aepP/YC94hEpVNVgiZdgIC5+VKNBQNGCHeKRQN+PtmoHDEXuppvnDJzQIu9" crossorigin="anonymous" />
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.9.1/font/bootstrap-icons.css">
-    <link rel="stylesheet" href="style.css" />
+    $total = 0;
+    $subtotal = 0;
+    $shipping = 0;
 
-    <link rel="icon" href="resources/logo.svg" />
+?>
+    <!DOCTYPE html>
+    <html>
 
-</head>
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<body>
+        <title>Cart | eShop</title>
 
-    <div class="container-fluid">
-        <div class="row">
+        <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-4bw+/aepP/YC94hEpVNVgiZdgIC5+VKNBQNGCHeKRQN+PtmoHDEXuppvnDJzQIu9" crossorigin="anonymous" />
+        <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.9.1/font/bootstrap-icons.css">
+        <link rel="stylesheet" href="style.css" />
 
-            <?php 
-            include "header.php";
-            ?>
+        <link rel="icon" href="resources/logo.svg" />
+
+    </head>
+
+    <body>
+
+        <div class="container-fluid">
+            <div class="row">
+
+                <?php
+                include "header.php";
+                ?>
 
                 <div class="col-12 pt-2" style="background-color: #E3E5E4;">
                     <nav aria-label="breadcrumb">
@@ -59,6 +72,12 @@
                             <hr />
                         </div>
 
+                        <?php
+                        $cart_rs = Database::search("SELECT * FROM `cart` WHERE `users_email`='" . $user . "'");
+                        $cart_num = $cart_rs->num_rows;
+
+                        if ($cart_num == 0) {
+                        ?>
                             <!-- Empty View -->
                             <div class="col-12">
                                 <div class="row">
@@ -76,12 +95,45 @@
                                 </div>
                             </div>
                             <!-- Empty View -->
-
+                        <?php
+                        } else {
+                        ?>
                             <!-- products -->
 
                             <div class="col-12 col-lg-9">
                                 <div class="row">
 
+                                    <?php
+                                    for ($x = 0; $x < $cart_num; $x++) {
+                                        $cart_data = $cart_rs->fetch_assoc();
+
+                                        $product_rs = Database::search("SELECT * FROM `product` WHERE 
+                                                    `id`='" . $cart_data["product_id"] . "'");
+                                        $product_data = $product_rs->fetch_assoc();
+
+                                        $total = $total + ($product_data["price"] * $cart_data["qty"]);
+
+                                        $address_rs = Database::search("SELECT district.district_id AS `did` FROM 
+                                    `users_has_address` INNER JOIN `city` ON 
+                                    users_has_address.city_city_id=city.city_id INNER JOIN `district` ON 
+                                    city.district_district_id=district.district_id WHERE `users_email`='" . $user . "'");
+                                        $address_data = $address_rs->fetch_assoc();
+
+                                        $ship = 0;
+
+                                        if ($address_data["did"] == 15) {
+                                            $ship = $product_data["delivery_fee_colombo"];
+                                            $shipping = $shipping + $product_data["delivery_fee_colombo"];
+                                        } else {
+                                            $ship = $product_data["delivery_fee_other"];
+                                            $shipping = $shipping + $product_data["delivery_fee_other"];
+                                        }
+
+                                        $seller_rs = Database::search("SELECT * FROM `users` WHERE 
+                                                                    `email`='" . $product_data["users_email"] . "'");
+                                        $seller_data = $seller_rs->fetch_assoc();
+                                        $seller = $seller_data["fname"] . " " . $seller_data["lname"];
+                                    ?>
                                         <div class="card mb-3 mx-0 col-12">
                                             <div class="row g-0">
                                                 <div class="col-md-12 mt-3 mb-3">
@@ -97,8 +149,9 @@
                                                 <!-- popup -->
                                                 <div class="col-md-4">
 
-                                                    <span class="d-inline-block" tabindex="0" data-bs-toggle="popover" data-bs-trigger="hover focus" 
-                                                    data-bs-content="good" title="Product Description">
+                                                    <span class="d-inline-block" tabindex="0" data-bs-toggle="popover" 
+                                                    data-bs-trigger="hover focus" data-bs-content="<?php echo $product_data["description"]; ?>" 
+                                                    title="Product Description">
                                                         <img src="resources/empty.svg" class="img-fluid rounded-start" style="max-width: 200px;">
                                                     </span>
 
@@ -126,7 +179,8 @@
                                                 <div class="col-md-3">
                                                     <div class="card-body d-grid">
                                                         <a class="btn btn-outline-success mb-2">Buy Now</a>
-                                                        <a class="btn btn-outline-danger mb-2">Remove</a>
+                                                        <a class="btn btn-outline-danger mb-2" 
+                                                        onclick="removeFromCart(<?php echo $cart_data['cart_id']; ?>);">Remove</a>
                                                     </div>
                                                 </div>
 
@@ -144,78 +198,94 @@
                                                 </div>
                                             </div>
                                         </div>
+                                    <?php
+                                    }
+                                    ?>
+
+
 
                                 </div>
                             </div>
 
                             <!-- products -->
-                        
-                        <!-- summary -->
-                        <div class="col-12 col-lg-3">
-                            <div class="row">
 
-                                <div class="col-12">
-                                    <label class="form-label fs-3 fw-bold">Summary</label>
+                            <!-- summary -->
+                            <div class="col-12 col-lg-3">
+                                <div class="row">
+
+                                    <div class="col-12">
+                                        <label class="form-label fs-3 fw-bold">Summary</label>
+                                    </div>
+
+                                    <div class="col-12">
+                                        <hr />
+                                    </div>
+
+                                    <div class="col-6 mb-3">
+                                        <span class="fs-6 fw-bold">items (<?php echo $cart_num; ?>)</span>
+                                    </div>
+
+                                    <div class="col-6 text-end mb-3">
+                                        <span class="fs-6 fw-bold">Rs. <?php echo $total; ?> .00</span>
+                                    </div>
+
+                                    <div class="col-6">
+                                        <span class="fs-6 fw-bold">Shipping</span>
+                                    </div>
+
+                                    <div class="col-6 text-end">
+                                        <span class="fs-6 fw-bold">Rs. <?php echo $shipping; ?> .00</span>
+                                    </div>
+
+                                    <div class="col-12 mt-3">
+                                        <hr />
+                                    </div>
+
+                                    <div class="col-6 mt-2">
+                                        <span class="fs-4 fw-bold">Total</span>
+                                    </div>
+
+                                    <div class="col-6 mt-2 text-end">
+                                        <span class="fs-4 fw-bold">Rs. <?php echo $total + $shipping; ?> .00</span>
+                                    </div>
+
+                                    <div class="col-12 mt-3 mb-3 d-grid">
+                                        <button class="btn btn-primary fs-5 fw-bold">CHECKOUT</button>
+                                    </div>
+
                                 </div>
-
-                                <div class="col-12">
-                                    <hr />
-                                </div>
-
-                                <div class="col-6 mb-3">
-                                    <span class="fs-6 fw-bold">items (10)</span>
-                                </div>
-
-                                <div class="col-6 text-end mb-3">
-                                    <span class="fs-6 fw-bold">Rs. 100000 .00</span>
-                                </div>
-
-                                <div class="col-6">
-                                    <span class="fs-6 fw-bold">Shipping</span>
-                                </div>
-
-                                <div class="col-6 text-end">
-                                    <span class="fs-6 fw-bold">Rs. 700 .00</span>
-                                </div>
-
-                                <div class="col-12 mt-3">
-                                    <hr />
-                                </div>
-
-                                <div class="col-6 mt-2">
-                                    <span class="fs-4 fw-bold">Total</span>
-                                </div>
-
-                                <div class="col-6 mt-2 text-end">
-                                    <span class="fs-4 fw-bold">Rs. 100700 .00</span>
-                                </div>
-
-                                <div class="col-12 mt-3 mb-3 d-grid">
-                                    <button class="btn btn-primary fs-5 fw-bold">CHECKOUT</button>
-                                </div>
-
                             </div>
-                        </div>
-                        <!-- summary -->
-                     
+                            <!-- summary -->
+                        <?php
+                        }
+                        ?>
+
+
+
+
+
                     </div>
                 </div>
 
-            <?php include "footer.php"; ?>
+                <?php include "footer.php"; ?>
 
+            </div>
         </div>
-    </div>
 
-    
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/js/bootstrap.bundle.min.js" integrity="sha384-HwwvtgBNo3bZJJLYd8oVXjrBZt8cqVSpeBNS5n7C8IVInixGAoxmnlMuBnhbgrkm" crossorigin="anonymous"></script>
-    <script src="script.js"></script>
 
-    <script>
-        var popoverTriggerList = [].slice.call(document.querySelectorAll('[data-bs-toggle="popover"]'))
-        var popoverList = popoverTriggerList.map(function(popoverTriggerEl) {
-            return new bootstrap.Popover(popoverTriggerEl)
-        })
-    </script>
-</body>
+        <script src="script.js"></script>
 
-</html>
+        <script>
+            var popoverTriggerList = [].slice.call(document.querySelectorAll('[data-bs-toggle="popover"]'))
+            var popoverList = popoverTriggerList.map(function(popoverTriggerEl) {
+                return new bootstrap.Popover(popoverTriggerEl)
+            })
+        </script>
+    </body>
+
+    </html>
+<?php
+
+}
+
+?>

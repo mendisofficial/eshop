@@ -157,7 +157,7 @@ require "connection.php";
                                                 <span class="card-text text-warning fw-bold">In Stock</span><br />
                                                 <span class="card-text text-success fw-bold"><?php echo $product_data["qty"]; ?> Items Available</span><br />
                                                 <a href="<?php echo "singleProductView.php?id=". ($product_data["id"]); ?>" class="col-12 btn btn-success">Buy Now</a>
-                                                <button class="col-12 btn btn-dark mt-2">
+                                                <button class="col-12 btn btn-dark mt-2" onclick="addToCart(<?php echo $product_data['id'];?>);">
                                                     <i class="bi bi-cart4 text-white fs-5"></i>
                                                 </button>
                                                 <button onclick="addToWatchlist(<?php echo $product_data['id'];?>);" class="col-12 btn btn-outline-light mt-2 border border-primary">

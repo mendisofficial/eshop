@@ -649,3 +649,25 @@ function removeFromWatchlist(id){
     r.open("GET","removeFromWatchListProcess.php?id="+id,true);
     r.send();
 }
+
+function addToCart(id) {
+
+    var r = new XMLHttpRequest();
+
+    r.onreadystatechange = function () {
+        if (r.status == 200 && r.readyState == 4) {
+            var t = r.responseText;
+            if (t == "This Product Already Exists In The Cart") {
+                alert("This Product Already Exists In The Cart");
+            } else if (t == "Product Added") {
+                alert("Product Added");
+            } else {
+                alert(t);
+            }
+        }
+    }
+
+    r.open("GET", "addToCartProcess.php?id=" + id, true);
+    r.send();
+
+}

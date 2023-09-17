@@ -46,7 +46,7 @@ An e-commerce web application using Bootstrap as the frontend and PHP, MySQL as 
 - [x] Program the cart total price calculation process including the delivery fee
 - [x] Design a responsive product details pop-up modal in the cart section using HTML, CSS, JavaScript and Bootstrap
 - [x] Program the product removing process from the cart
-- [ ] Design a responsive invoice page using HTML, CSS, JavaScript and Bootstrap
+- [x] Design a responsive invoice page using HTML, CSS, JavaScript and Bootstrap
 - [ ] Program the product purchasing process through the PayHere payment gateway
 - [ ] Program the invoice page
 - [ ] Design a responsive purchase history page using HTML, CSS, JavaScript and Bootstrap

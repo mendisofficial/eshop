@@ -671,3 +671,23 @@ function addToCart(id) {
     r.send();
 
 }
+
+function removeFromCart(id) {
+
+    var r = new XMLHttpRequest();
+
+    r.onreadystatechange = function () {
+        if (r.status == 200 && r.readyState == 4) {
+            var t = r.responseText;
+            if (t == "deleted") {
+                window.location.reload();
+            } else {
+                alert(t);
+            }
+        }
+    }
+
+    r.open("GET", "removeFromCartProcess.php?id=" + id, true);
+    r.send();
+
+}

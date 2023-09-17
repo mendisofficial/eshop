@@ -2,6 +2,10 @@
 session_start();
 require "connection.php";
 
+require_once("vendor/autoload.php");
+$dotenv = Dotenv\Dotenv::createImmutable(__DIR__);
+$dotenv->load();
+
 if (isset($_GET["id"])) {
     $pid = $_GET["id"];
 
@@ -234,7 +238,7 @@ if (isset($_GET["id"])) {
                                                                         <div class="col-12 mt-5">
                                                                             <div class="row">
                                                                                 <div class="col-4 d-grid">
-                                                                                    <button class="btn btn-success" type="submit" id="payhere-payment">Buy Now</button>
+                                                                                    <button class="btn btn-success" type="submit" id="payhere-payment" onclick="paynow(<?php echo $pid; ?>);">Pay Now</button>
                                                                                 </div>
                                                                                 <div class="col-4 d-grid">
                                                                                     <button class="btn btn-primary">Add To Cart</button>
@@ -392,6 +396,87 @@ if (isset($_GET["id"])) {
             </div>
 
             <script src="script.js"></script>
+            <script type="text/javascript" src="https://www.payhere.lk/lib/payhere.js"></script>
+            <script>
+                function paynow(pid) {
+
+                    var qty = document.getElementById("qty_input").value;
+
+                    var r = new XMLHttpRequest();
+
+                    r.onreadystatechange = function() {
+                        if (r.status == 200 && r.readyState == 4) {
+                            var t = r.responseText;
+                            var obj = JSON.parse(t);
+
+                            var umail = obj["umail"];
+                            var amount = obj["amount"];
+
+                            if (t == "address error") {
+                                alert("Please Update Your Profile.");
+                                window.location = "userProfile.php";
+                            } else {
+
+                                // Payment completed. It can be a successful failure.
+                                payhere.onCompleted = function onCompleted(orderId) {
+                                    console.log("Payment completed. OrderID:" + orderId);
+
+                                    window.location = "invoice.php";
+                                    // Note: validate the payment and show success or failure page to the customer
+                                };
+
+                                // Payment window closed
+                                payhere.onDismissed = function onDismissed() {
+                                    // Note: Prompt user to pay again or show an error page
+                                    console.log("Payment dismissed");
+                                };
+
+                                // Error occurred
+                                payhere.onError = function onError(error) {
+                                    // Note: show an error page
+                                    console.log("Error:" + error);
+                                };
+
+                                // Put the payment variables here
+                                var payment = {
+                                    "sandbox": true,
+                                    "merchant_id": "<?php echo $_ENV["PAYHERE_MERCHANT_ID"] ?>", // Replace your Merchant ID
+                                    "return_url": "http://localhost:8080/singleProductView.php?id=" + pid, // Important
+                                    "cancel_url": "http://localhost:8080/singleProductView.php?id=" + pid, // Important
+                                    "notify_url": "http://sample.com/notify",
+                                    "order_id": obj["id"],
+                                    "items": obj["item"],
+                                    "amount": amount,
+                                    "currency": "LKR",
+                                    "hash": obj["hash"], // *Replace with generated hash retrieved from backend
+                                    "first_name": obj["fname"],
+                                    "last_name": obj["lname"],
+                                    "email": umail,
+                                    "phone": obj["mobile"],
+                                    "address": obj["address"],
+                                    "city": obj["city"],
+                                    "country": "Sri Lanka",
+                                    "delivery_address": obj["address"],
+                                    "delivery_city": obj["city"],
+                                    "delivery_country": "Sri Lanka",
+                                    "custom_1": "",
+                                    "custom_2": ""
+                                };
+
+                                // Show the payhere.js popup, when "PayHere Pay" is clicked
+                                // document.getElementById('payhere-payment').onclick = function (e) {
+                                payhere.startPayment(payment);
+                                // };
+
+                            }
+                        }
+                    }
+
+                    r.open("GET", "payNowProcess.php?id=" + pid + "&qty=" + qty, true);
+                    r.send();
+
+                }
+            </script>
 
         </body>
 

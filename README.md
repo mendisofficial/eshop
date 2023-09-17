@@ -41,7 +41,7 @@ An e-commerce web application using Bootstrap as the frontend and PHP, MySQL as 
 - [x] Design a responsive watchlist page using HTML, CSS, JavaScript and Bootstrap
 - [x] Program the watchlist page including product adding and viewing process
 - [x] Program the product removing process from the watchlist
-- [ ] Design a responsive cart page using HTML, CSS, JavaScript and Bootstrap
+- [x] Design a responsive cart page using HTML, CSS, JavaScript and Bootstrap
 - [ ] Program the cart page including product adding and viewing process
 - [ ] Program the cart total price calculation process including the delivery fee
 - [ ] Design a responsive product details pop-up modal in the cart section using HTML, CSS, JavaScript and Bootstrap
